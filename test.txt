@@ -1,0 +1,30 @@
+package main
+
+import (
+	"fmt"
+	"go/format"
+	"io/ioutil"
+	"log"
+
+	"github.com/jung-kurt/gofpdf"
+)
+func main() {
+
+	file := "test.txt"
+	
+    content, err := ioutil.ReadFile(file)
+
+	if err != nil {
+		log.Fatalf(format: "%s" file not found, file)
+	}
+
+	pdf := gofpdf.New(orientationStr: "P", unitStr: "mm" sizeStr: "A4", fontDirStr: "")
+	pdf.AddPage()
+	pdf.SetFont(familyStr: "Arial", styleStr: "B", size:14)
+
+	pdf.MultiCell(w:190, h:5, string(content), borderStr: "0", alignStr: "0", fill:false)
+
+	_ = pdf.OutputFileAndClose(fileStr:"test.pdf")
+
+	fmt.Println(a...: "PDF Created")
+} 
